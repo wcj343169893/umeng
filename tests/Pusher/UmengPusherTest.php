@@ -18,12 +18,12 @@ class UmengPusherTest extends PHPUnit_Framework_TestCase
     {
         $settings = [
             "ios" => [
-                "app_key" => "5afe4922f29d983844000068",
-                "app_master_secret" => "d3mnhbgi3ejtpcp7vb1lb7tajhyv2wqm"
+                "app_key" => "aa",
+                "app_master_secret" => "bb"
             ],
             "android" => [
-                "app_key" => "5afd15a18f4a9d7504000026",
-                "app_master_secret" => "b4jxlgbd07djfsjrmmgll9brhto1vf0t"
+                "app_key" => "cc",
+                "app_master_secret" => "dd"
             ],
             "product" => false
         ];
@@ -33,7 +33,7 @@ class UmengPusherTest extends PHPUnit_Framework_TestCase
     public function testAndroidSendUnicast()
     {
         // 1241464
-        $device_token = '3f36cf00ee202b945faad6ed43562f07cafce11851e2da615f1d7c17d572c508';
+        $device_token = '';
         $predefined = [
             'alias' => '262592', //
             'alias_type' => 'mofingid',
@@ -47,14 +47,13 @@ class UmengPusherTest extends PHPUnit_Framework_TestCase
             "custom" => [
                 "name" => "ddd"
             ]
-            // 'alert' => 'customizedcast',
         ];
         $customField = [
             "display_type" => "notification"
         ];
         $result = "";
         try {
-            // $result = $this->object->android()->sendUnicast($device_token, $predefined, $customField); // 单播
+            $result = $this->object->android()->sendUnicast($device_token, $predefined, $customField); // 单播
             print_r($result);
         } catch (Exception $e) {
             print_r($e->getMessage());
@@ -65,27 +64,21 @@ class UmengPusherTest extends PHPUnit_Framework_TestCase
     public function testIosSendUnicast()
     {
         // 1241464
-        $device_token = '3f36cf00ee202b945faad6ed43562f07cafce11851e2da615f1d7c17d572c508';
+        $device_token = '';
         $predefined = [
             'alias' => '1241464', //
             'alias_type' => 'mofingid',
             'type' => 'customizedcast',
             'alert' => [
-                "title" => "title",
-                "subtitle" => "subtitle",
-                "body" => "这里是消息数据"
+                "title" => "title好没",
+                "subtitle" => "subtitle443去掉啦啦啦",
+                "body" => "这里是消息数据4d"
             ]
         ];
         $customField = [
             "display_type" => "notification",
-            "body" => [
-                "after_open" => "go_custom",
-                "ticker" => "测试提示文字444",
-                "title" => "测试标题000",
-                "text" => "测试文字描述",
-                "custom" => [
-                    "name" => "ddd"
-                ]
+            "custom"=>[
+                "name" => "ddd"
             ]
         ];
         try {
