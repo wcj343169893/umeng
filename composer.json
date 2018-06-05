@@ -1,12 +1,13 @@
 {
 	"name" : "mofing/umeng",
-	"description" : "umeng for cakephp",
+	"description" : "umeng 消息推送，支持composer安装使用",
 	"keywords" : [
 		"lumen",
 		"umeng",
-		"cakephp"
+		"cakephp",
+		"composer"
 	],
-	"homepage" : "https://github.com/marstea/umeng",
+	"homepage" : "https://github.com/wcj343169893/umeng",
 	"license" : "MIT",
 	"authors" : [{
 			"name" : "houguangcong",
@@ -32,5 +33,9 @@
 			"UmengPusher\\Umeng\\" : "tests"
 		}
 	},
-	"minimum-stability" : "stable"
+	"minimum-stability" : "stable",
+	"type" : "library",
+	"require-dev" : {
+		"phpunit/phpunit" : "4.5.*"
+	}
 }
