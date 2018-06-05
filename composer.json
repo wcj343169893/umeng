@@ -1,32 +1,33 @@
 {
-    "name": "umengpusher/umeng",
-    "description": "umeng for laravel",
-    "keywords": [
-        "laravel",
-        "lumen",
-        "umeng"
-    ],
-    "homepage": "https://github.com/marstea/umeng",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "houguangcong",
-            "email": "houguangcong@163.com"
-        }
-    ],
-    "require": {
-        "illuminate/support": "~5.1",
-        "php" : "~5.6|~7.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "UmengPusher\\Umeng\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "UmengPusher\\Umeng\\": "tests"
-        }
-    },
-     "minimum-stability": "stable"
+	"name" : "mofing/umeng",
+	"description" : "umeng for cakephp",
+	"keywords" : [
+		"lumen",
+		"umeng",
+		"cakephp"
+	],
+	"homepage" : "https://github.com/marstea/umeng",
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "houguangcong",
+			"email" : "houguangcong@163.com"
+		}, {
+			"name" : "wenchaojun",
+			"homepage" : "https://www.cjblog.org"
+		}
+	],
+	"require" : {
+		"php" : "~5.6|~7.0"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"UmengPusher\\Umeng\\" : "src"
+		}
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"UmengPusher\\Umeng\\" : "tests"
+		}
+	},
+	"minimum-stability" : "stable"
 }

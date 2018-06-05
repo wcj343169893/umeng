@@ -1,26 +1,104 @@
 <?php
-
 namespace UmengPusher\Umeng\Exception;
 
-use Exception;
+use RuntimeException;
 
-class UmengException extends Exception
+class UmengException extends RuntimeException
 {
-    protected $httpCode;
-    protected $errCode;
 
-    public function __construct($message, $httpCode = 200, $errCode = 0)
+    /**
+     * Array of attributes that are passed in from the constructor, and
+     * made available in the view when a development error is displayed.
+     *
+     * @var array
+     */
+    protected $_attributes = [];
+
+    /**
+     * Template string that has attributes sprintf()'ed into it.
+     *
+     * @var string
+     */
+    protected $_messageTemplate = '';
+
+    /**
+     * Array of headers to be passed to Cake\Http\Response::header()
+     *
+     * @var array|null
+     */
+    protected $_responseHeaders;
+
+    /**
+     * Default exception code
+     *
+     * @var int
+     */
+    protected $_defaultCode = 404;
+
+    /**
+     * Constructor.
+     *
+     * Allows you to create exceptions that are treated as framework errors and disabled
+     * when debug = 0.
+     *
+     * @param string|array $message
+     *            Either the string of the error message, or an array of attributes
+     *            that are made available in the view, and sprintf()'d into Exception::$_messageTemplate
+     * @param int|null $code
+     *            The code of the error, is also the HTTP status code for the error.
+     * @param \Exception|null $previous
+     *            the previous exception.
+     */
+    public function __construct($message = '', $code = null, $previous = null)
     {
-        parent::__construct($message);
-        $this->httpCode = $httpCode;
-        $this->errCode = $errCode;
+        if ($code === null) {
+            $code = $this->_defaultCode;
+        }
+        
+        if (is_array($message)) {
+            $this->_attributes = $message;
+            $message = vsprintf($this->_messageTemplate, $message);
+        }
+        parent::__construct($message, $code, $previous);
     }
 
-    public function getHttpCode(){
-        return $this->httpCode;
+    /**
+     * Get the passed in attributes
+     *
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->_attributes;
     }
 
-    public function getErrCode(){
-        return $this->errCode;
+    /**
+     * Get/set the response header to be used
+     *
+     * See also Cake\Http\Response::withHeader()
+     *
+     * @param string|array|null $header
+     *            An array of header strings or a single header string
+     *            - an associative array of "header name" => "header value"
+     *            - an array of string headers is also accepted (deprecated)
+     * @param string|null $value
+     *            The header value.
+     * @return array
+     */
+    public function responseHeader($header = null, $value = null)
+    {
+        if ($header === null) {
+            return $this->_responseHeaders;
+        }
+        if (is_array($header)) {
+            if (isset($header[0])) {
+                deprecationWarning('Passing a list string headers to Exception::responseHeader() is deprecated. ' . 'Use an associative array instead.');
+            }
+            
+            return $this->_responseHeaders = $header;
+        }
+        $this->_responseHeaders = [
+            $header => $value
+        ];
     }
 }

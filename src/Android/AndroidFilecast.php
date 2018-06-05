@@ -3,7 +3,7 @@ namespace UmengPusher\Umeng\Android;
 
 use UmengPusher\Umeng\AndroidNotification;
 use UmengPusher\Umeng\Exception\UmengException;
-use Log;
+use Cake\Log\Log;
 
 class AndroidFilecast extends AndroidNotification {
 	function  __construct() {

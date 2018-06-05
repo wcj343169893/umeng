@@ -1,55 +1,11 @@
-# 基于umeng官方php sdk v1.4,支持Laravel5以及Lumen5
+# 基于umeng官方php sdk v1.4,支持cakephp 3.x
 
 ## 安装
-```php
-    composer require UmengPusher/Umeng   
+``` bash
+$ composer require mofing/ument:"~1.0"
 ```
-  
-## Laravel 5.* 配置
-打开config目录下的app.php文件,找到provider,添加如下代码:
+1. https://www.umeng.com/ 开发者中心 创建一个应用得到appkey
 
-```php
-    'provider' => [
-       UmengPusher\Umeng\UmengServiceProvider::class, 
-    ],
-```
-配置alias:
-
-```php
-    'aliases' => [
-        'Umeng' => UmengPusher\Umeng\Facades\Umeng::class,
-    ],
-```
-
-生成配置文件:
-
-```php
-    php artisan vendor:publish   
-```
-
-在配置文件umeng.php中填入appkey以及master_secret既可完成配置
-
-## 在Lumen 5.*中配置
-
-打开bootstrap目录下的app.php文件,注册provider:
-
-```php
-    $app->register(UmengPusher\Umeng\UmengServiceProvider::class);
-```
-
-配置alias:
-
-```php
-    class_alias('UmengPusher\Umeng\Facades\Umeng','Umeng');
-```
-
-生成配置文件:
-
-```php
-    php artisan vendor:publish 
-```
-
-在配置文件umeng.php中填入appkey以及master_secret既可完成配置
 
 ## 用法
 
@@ -68,13 +24,13 @@ Android用法:
 IOS用法:
 
 ```php
+    use UmengPusher;
     
-    use Umeng;
-    
+    $UmengPusher=new UmengPusher([]);
     $device_token = 'xxxx';
     $predefined = array('alert' => 'ios alert' ,...);
     $customField = array(); //other custom filed
-    Umeng::ios()->sendUnicast($device_token,$predefined,$customField); //单播
+    $UmengPusher->ios()->sendUnicast($device_token,$predefined,$customField); //单播
     
 ```
 
